@@ -1,17 +1,11 @@
 import PostList from "../widgets/PostList/PostList";
 import posts from "../Posts.json";
-import "./App.css";
-import { useTheme } from "../shared/lib/theme/useTheme";
-import Header from "../widgets/LayoutHeader/LayoutHeader";
+import MainLayout from "../shared/layouts/MainLayout";
 function App() {
-  const { theme } = useTheme();
   return (
-    <>
-      <div className={`${theme}`}>
-        <Header />
-        <PostList posts={posts} />
-      </div>
-    </>
+    <MainLayout>
+      <PostList posts={posts} />
+    </MainLayout>
   );
 }
 

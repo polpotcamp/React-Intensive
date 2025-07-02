@@ -8,7 +8,7 @@ interface PostListProps {
 
 const PostList: FC<PostListProps> = ({ posts }) => {
   return (
-    <div className={`${styles.posts}`}>
+    <div className={styles.posts}>
       {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
