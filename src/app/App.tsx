@@ -2,7 +2,7 @@ import PostList from "../widgets/PostList/PostList";
 import posts from "../Posts.json";
 import "./App.css";
 import { useTheme } from "../shared/lib/theme/useTheme";
-import Header from "../widgets/LayoutHeader/Header";
+import Header from "../widgets/LayoutHeader/LayoutHeader";
 function App() {
   const { theme } = useTheme();
   return (
