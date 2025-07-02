@@ -2,7 +2,7 @@ import React, { type FC } from "react";
 import ThemeSwitcher from "../../features/ThemeSwitcher/ui/ThemeSwitcher";
 import Modal from "../../shared/ui/Modal/Modal";
 import { Button } from "../../shared/ui/Button/Button";
-const Header: FC = () => {
+const LayoutHeader: FC = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
   return (
     <header>
@@ -12,11 +12,12 @@ const Header: FC = () => {
       <ThemeSwitcher />
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-          Информация о проекте   Информация о проекте   Информация о проекте   Информация о проекте 
+          Информация о проекте Информация о проекте Информация о проекте
+          Информация о проекте
         </Modal>
       )}
     </header>
   );
 };
 
-export default Header;
+export default LayoutHeader;

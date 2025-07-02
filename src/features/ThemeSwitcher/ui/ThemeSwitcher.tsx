@@ -5,7 +5,7 @@ const ThemeSwitcher: FC = () => {
 
   return (
     <button onClick={toggleTheme}>
-      поменять тему на {theme === "light" ? "dark" : "light"} 
+      поменять тему на {theme === "light" ? "dark" : "light"}
     </button>
   );
 };
