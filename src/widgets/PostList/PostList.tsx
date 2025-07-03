@@ -3,7 +3,7 @@ import type { TPost } from "../../types/PostType";
 import PostCard from "../../entities/post/ui/PostCard";
 import styles from "./PostList.module.css";
 interface PostListProps {
-  posts: Array<TPost>;
+  posts: TPost[];
 }
 
 const PostList: FC<PostListProps> = ({ posts }) => {
