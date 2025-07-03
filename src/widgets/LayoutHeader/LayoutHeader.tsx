@@ -10,12 +10,14 @@ const LayoutHeader: FC = () => {
         Открыть модальное окно с информацией о проекте
       </Button>
       <ThemeSwitcher />
-      {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-          Информация о проекте Информация о проекте Информация о проекте
-          Информация о проекте
+          <Modal.Header>заголовок модального окна</Modal.Header>
+          <Modal.Body>
+            Информация о проекте Информация о проекте Информация о проекте
+            Информация о проекте
+          </Modal.Body>
+          <Modal.Footer>footer</Modal.Footer>
         </Modal>
-      )}
     </header>
   );
 };
