@@ -1,7 +1,6 @@
 /*стили будут добавлены когда будет макет*/
 .postContainer{
     width: 240px;
-    height: 120px;
     display: flex;
     flex-direction: column;
     border: 2px red solid;

@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import type { TPost } from "../../types/PostType";
+import type { Post } from "../../types/PostType";
 import PostCard from "../../entities/post/ui/PostCard";
 import styles from "./PostList.module.css";
 interface PostListProps {
-  posts: TPost[];
+  posts: Post[];
 }
 
 const PostList: FC<PostListProps> = ({ posts }) => {
