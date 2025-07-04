@@ -1,8 +1,8 @@
-import type { TTheme } from "../../../types/ThemeType";
+import type { Theme } from "../../../types/ThemeType";
 import { useContext, createContext } from "react";
 
 interface IThemeContextProps {
-  theme: TTheme;
+  theme: Theme;
   toggleTheme: () => void;
 }
 export const ThemeContext = createContext<IThemeContextProps | null>(null);
