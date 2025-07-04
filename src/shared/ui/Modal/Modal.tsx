@@ -1,6 +1,7 @@
 import React, { useEffect, type ReactNode } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
+import { useTheme } from "../../lib/theme/useTheme";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -10,6 +11,7 @@ interface ModalProps {
 const modalRoot = document.getElementById("modal-root") as HTMLElement;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const {theme} = useTheme()
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -32,8 +34,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return ReactDOM.createPortal(
     <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeBtn} onClick={onClose} type="button">
+      <div className={styles.modal}  onClick={(e) => e.stopPropagation()}>
+        <button className={`${styles.closeBtn} ${styles[theme]}`} onClick={onClose} type="button">
           закрыть
         </button>
         {children}
