@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
+import { useTheme } from "../../lib/theme/useTheme";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -57,6 +58,7 @@ const Modal: React.FC<ModalProps> & ModalCompoundComponents = ({
   );
 };
 const Header = ({ children }: CompoundComponentProps) => {
+  const { theme } = useTheme();
   const context = React.useContext(ModalContext);
   if (!context) {
     throw new Error("Header используется вне контекста Modal");
@@ -65,7 +67,11 @@ const Header = ({ children }: CompoundComponentProps) => {
 
   return (
     <div className="modal-header">
-      <button className={styles.closeBtn} onClick={onClose} type="button">
+      <button
+        className={`${styles.closeBtn} ${styles[theme]}`}
+        onClick={onClose}
+        type="button"
+      >
         закрыть
       </button>
       <h2>{children}</h2>

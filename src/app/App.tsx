@@ -3,9 +3,11 @@ import type { Post } from "../types/PostType";
 import MainLayout from "../shared/layouts/MainLayout";
 import React from "react";
 import withLoading from "../shared/lib/hoc/HOC";
+import PostLengthFilter from "../features/PostLengthFilter/ui/PostLengthFilter";
 function App() {
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]);
   React.useEffect(() => {
     setLoading(true);
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -17,6 +19,7 @@ function App() {
       })
       .then((data: Post[]) => {
         setPosts(data);
+        setFilteredPosts(data);
         setLoading(false);
       })
       .catch((err: Error) => {
@@ -24,10 +27,11 @@ function App() {
         throw new Error(`${err}`);
       });
   }, []);
-  const PostListWithLoading = withLoading(PostList);
+  const PostListWithLoading = React.useMemo(() => withLoading(PostList), []);
   return (
     <MainLayout>
-      <PostListWithLoading isLoading={loading} posts={posts} />
+      <PostLengthFilter posts={posts} onFilter={setFilteredPosts} />
+      <PostListWithLoading isLoading={loading} posts={filteredPosts} />
     </MainLayout>
   );
 }

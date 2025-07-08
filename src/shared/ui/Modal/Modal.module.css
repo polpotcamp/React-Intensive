@@ -25,3 +25,6 @@
     background: transparent;
     border: none;
 }
+.dark {
+    color: white;
+}
