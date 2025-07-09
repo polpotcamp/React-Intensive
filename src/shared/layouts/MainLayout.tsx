@@ -1,14 +1,21 @@
-import type { FC, ReactNode } from "react";
+import React from "react";
+import LayoutHeader from "../../widgets/LayoutHeader/LayoutHeader";
+import LayoutFooter from "../../widgets/LayoutFooter/LayoutFooter";
+import { useTheme } from "../lib/theme/useTheme";
+import "./MainLayout.css";
 interface MainLayoutProps {
-    children: ReactNode
+  children: React.ReactNode;
 }
- 
-const MainLayout: FC<MainLayoutProps> = ({children}) => {
-    return ( 
-        <main>
-            {children}
-        </main>
-     );
-}
- 
+
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const { theme } = useTheme();
+  return (
+    <main className={theme}>
+      <LayoutHeader />
+      {children}
+      <LayoutFooter />
+    </main>
+  );
+};
+
 export default MainLayout;

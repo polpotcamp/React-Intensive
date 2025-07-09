@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import type { TPost } from "../../../types/PostType";
-import styles from './PostCard.module.css'
+import type { Post } from "../../../types/PostType";
+import styles from "./PostCard.module.css";
 interface PostCardProps {
-    post: TPost
+  post: Post;
 }
  
 const PostCard: FC<PostCardProps> = ({post}) => {

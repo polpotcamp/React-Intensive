@@ -1,17 +1,19 @@
 import type { FC } from "react";
-import type { TPost} from "../../types/PostType";
+import type { Post } from "../../types/PostType";
 import PostCard from "../../entities/post/ui/PostCard";
-import styles from './PostList.module.css'
+import styles from "./PostList.module.css";
 interface PostListProps {
-  posts: Array<TPost>;
+  posts: Post[];
 }
 
-const PostList: FC<PostListProps> = ({posts}) => {
-  return <div className={styles.posts}>
-    {posts.map((post) => (
+const PostList: FC<PostListProps> = ({ posts }) => {
+  return (
+    <div className={styles.posts}>
+      {posts.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
-  </div>;
+    </div>
+  );
 };
 
 export default PostList;
