@@ -11,7 +11,7 @@ const PostLengthFilter: React.FC<PostLengthFilterProps> = ({
   onFilter,
 }) => {
   const [minLength, setMinLength] = React.useState<string>("0");
-  const [maxLength, setMaxLength] = React.useState<string>("100000000");
+  const [maxLength, setMaxLength] = React.useState<string>("10000");
 
   const handleFilter = React.useCallback(() => {
     const min = parseInt(minLength, 10);
@@ -28,7 +28,13 @@ const PostLengthFilter: React.FC<PostLengthFilterProps> = ({
     const filtered = filterByLength(posts, "body", min, max);
     onFilter(filtered);
   }, [minLength, maxLength, posts, onFilter]);
+  const handleMinLengthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMinLength(e.target.value);
+  };
 
+  const handleMaxLengthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxLength(e.target.value);
+  };
   return (
     <div>
       <label>
@@ -36,7 +42,7 @@ const PostLengthFilter: React.FC<PostLengthFilterProps> = ({
         <input
           type="number"
           value={minLength}
-          onChange={(e) => setMinLength(e.target.value)}
+          onChange={handleMinLengthChange}
           min={0}
         />
       </label>
@@ -46,7 +52,7 @@ const PostLengthFilter: React.FC<PostLengthFilterProps> = ({
         <input
           type="number"
           value={maxLength}
-          onChange={(e) => setMaxLength(e.target.value)}
+          onChange={handleMaxLengthChange}
           min={0}
         />
       </label>
