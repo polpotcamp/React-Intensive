@@ -25,14 +25,13 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       throw new Error(`${err}`);
     }
   }, [post.id]);
+  const clearComments = () => setComments([]);
   return (
     <div className={styles.postContainer}>
       <p className={styles.postTitle}>{post.title}</p>
       <p className={styles.postText}>{post.body}</p>
       {comments.length > 0 ? (
-        <Button onClick={() => setComments([])}>
-          Закрыть коментарии к посту
-        </Button>
+        <Button onClick={clearComments}>Закрыть коментарии к посту</Button>
       ) : (
         <Button onClick={fetchComments}>Открыть коментарии к посту</Button>
       )}
