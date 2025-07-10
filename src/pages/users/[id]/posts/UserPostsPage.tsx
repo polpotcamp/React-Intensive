@@ -1,0 +1,54 @@
+import React from "react";
+import PostCard from "../../../../entities/post/ui/PostCard";
+import { useParams } from "react-router-dom";
+import type { Post } from "../../../../types/PostType";
+const UserPostsPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const userId = Number(id);
+
+  const [posts, setPosts] = React.useState<Post[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (isNaN(userId) || userId <= 0) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/users/${userId}/posts`
+        );
+        if (!response.ok) {
+          throw new Error(`Ошибка загрузки: ${response.status}`);
+        }
+
+        const data: Post[] = await response.json();
+        setPosts(data);
+      } catch (e) {
+        throw new Error(`${e as Error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, [userId]);
+
+  if (loading) return <p>Загрузка постов...</p>;
+  if (posts.length === 0) return <p>Посты не найдены</p>;
+
+  return (
+    <div>
+      <h1>Посты пользователя {userId}</h1>
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+};
+
+export default UserPostsPage;

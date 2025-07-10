@@ -1,0 +1,58 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import type { Photo } from "../../../../types/PhotoType";
+const AlbumPhotosPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const albumId = Number(id);
+
+  const [photos, setPhotos] = React.useState<Photo[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    if (isNaN(albumId) || albumId <= 0) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchPhotos = async () => {
+      try {
+        setLoading(true);
+
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`
+        );
+        if (!response.ok) {
+          throw new Error(`Ошибка загрузки: ${response.status}`);
+        }
+
+        const data: Photo[] = await response.json();
+        setPhotos(data);
+      } catch (e) {
+        throw new Error(`${e as Error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPhotos();
+  }, [albumId]);
+
+  if (loading) return <p>Загрузка фотографий...</p>;
+  if (photos.length === 0) return <p>Фотографии не найдены</p>;
+
+  return (
+    <div>
+      <h1>Фотографии альбома {albumId}</h1>
+      <ul>
+        {photos.map((photo) => (
+          <li key={photo.id}>
+            <img src={photo.thumbnailUrl} alt={photo.title} />
+            <p>{photo.title}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default AlbumPhotosPage;
