@@ -1,32 +1,18 @@
 import React from "react";
-import type{ Post } from "../../types/PostType";
+import type { Post } from "../../types/PostType";
 import PostLengthFilter from "../../features/PostLengthFilter/ui/PostLengthFilter";
 import PostList from "../../widgets/PostList/PostList";
 import withLoading from "../../shared/lib/hoc/HOC";
+import { usePosts } from "../../features/PostList/model/hooks/usePosts";
 const PostsPage: React.FC = () => {
-  const [posts, setPosts] = React.useState<Post[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const { posts, loading, error } = usePosts();
   const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]);
   React.useEffect(() => {
-    setLoading(true);
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data: Post[]) => {
-        setPosts(data);
-        setFilteredPosts(data);
-        setLoading(false);
-      })
-      .catch((err: Error) => {
-        setLoading(false);
-        throw new Error(`${err}`);
-      });
-  }, []);
+    setFilteredPosts(posts);
+  }, [posts]);
   const PostListWithLoading = React.useMemo(() => withLoading(PostList), []);
+  if (loading) return <p>Загрузка...</p>;
+  if (error) return <p>Ошибка: {error}</p>;
   return (
     <>
       <PostLengthFilter posts={posts} onFilter={setFilteredPosts} />
