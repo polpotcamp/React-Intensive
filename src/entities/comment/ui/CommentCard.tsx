@@ -1,6 +1,7 @@
 import React from "react";
 import type { Comment } from "../../../types/CommnetType";
 import styles from "./CommnetCard.module.css";
+
 interface CommentCardProps {
   comment: Comment;
 }
