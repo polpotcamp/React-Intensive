@@ -1,37 +1,62 @@
 [
   {
     "id": 1,
-    "title": "Введение в JavaScript",
-    "text": "JavaScript — это язык программирования, который позволяет создавать интерактивные веб-страницы."
+    "title": "First post",
+    "body": "This is the body of the first post.",
+    "userId": 1
   },
   {
     "id": 2,
-    "title": "Что такое TypeScript?",
-    "text": "TypeScript — это надмножество JavaScript, добавляющее статическую типизацию."
+    "title": "Second post",
+    "body": "This is another example post body.",
+    "userId": 2
   },
   {
     "id": 3,
-    "title": "Основы React",
-    "text": "React — это библиотека для построения пользовательских интерфейсов на основе компонентов."
+    "title": "Third post",
+    "body": "Yet another post for testing purposes.",
+    "userId": 3
   },
   {
     "id": 4,
-    "title": "Преимущества Vite",
-    "text": "Vite обеспечивает быстрый запуск и обновление проекта благодаря использованию ES-модулей."
+    "title": "Fourth post",
+    "body": "This post has some sample content.",
+    "userId": 1
   },
   {
     "id": 5,
-    "title": "Что такое событийная модель в браузере?",
-    "text": "Событийная модель описывает, как браузер обрабатывает события и их распространение по DOM."
+    "title": "Fifth post",
+    "body": "Post number five in the list.",
+    "userId": 2
   },
   {
     "id": 6,
-    "title": "Делегирование событий",
-    "text": "Делегирование событий позволяет обрабатывать события на родительском элементе вместо каждого дочернего."
+    "title": "Sixth post",
+    "body": "Another example of a post body.",
+    "userId": 3
   },
   {
     "id": 7,
-    "title": "Как инициализировать проект с Vite + TypeScript",
-    "text": "Для создания проекта выполните команду: npm create vite@latest my-app -- --template vanilla-ts."
+    "title": "Seventh post",
+    "body": "This is the seventh post in the array.",
+    "userId": 1
+  },
+  {
+    "id": 8,
+    "title": "Eighth post",
+    "body": "Almost at the end of the list.",
+    "userId": 2
+  },
+  {
+    "id": 9,
+    "title": "Ninth post",
+    "body": "Just one more post to go.",
+    "userId": 3
+  },
+  {
+    "id": 10,
+    "title": "Tenth post",
+    "body": "This is the final post in the array.",
+    "userId": 1
   }
 ]
