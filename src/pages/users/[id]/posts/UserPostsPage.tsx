@@ -2,6 +2,7 @@ import React from "react";
 import PostCard from "../../../../entities/post/ui/PostCard";
 import { useParams } from "react-router-dom";
 import type { Post } from "../../../../types/PostType";
+
 const UserPostsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);

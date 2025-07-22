@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import type { Photo } from "../../../../types/PhotoType";
+
 const AlbumPhotosPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const albumId = Number(id);
@@ -39,14 +40,20 @@ const AlbumPhotosPage: React.FC = () => {
 
   if (loading) return <p>Загрузка фотографий...</p>;
   if (photos.length === 0) return <p>Фотографии не найдены</p>;
-
+  console.log(photos);
   return (
     <div>
       <h1>Фотографии альбома {albumId}</h1>
       <ul>
         {photos.map((photo) => (
           <li key={photo.id}>
-            <img src={photo.thumbnailUrl} alt={photo.title} />
+            <img
+              src={photo.url.replace(
+                /(https:\/\/via\.placeholder\.com)(\/(\d+)\/([^/]+))/,
+                "https://placehold.co$2/FFF"
+              )}
+              alt={photo.title}
+            />
             <p>{photo.title}</p>
           </li>
         ))}

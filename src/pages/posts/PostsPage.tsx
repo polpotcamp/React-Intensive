@@ -4,6 +4,7 @@ import PostLengthFilter from "../../features/PostLengthFilter/ui/PostLengthFilte
 import PostList from "../../widgets/PostList/PostList";
 import withLoading from "../../shared/lib/hoc/HOC";
 import { usePosts } from "../../features/PostList/model/hooks/usePosts";
+
 const PostsPage: React.FC = () => {
   const { posts, loading, error } = usePosts();
   const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]);

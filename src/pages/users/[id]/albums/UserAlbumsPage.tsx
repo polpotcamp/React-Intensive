@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import type { Album } from "../../../../types/AlbumType";
+import { Link } from "react-router-dom";
+
 const UserAlbumsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);
@@ -45,7 +47,9 @@ const UserAlbumsPage: React.FC = () => {
       <h1>Альбомы пользователя {userId}</h1>
       <ul>
         {albums.map((album) => (
-          <li key={album.id}>{album.title}</li>
+          <li key={album.id}>
+            <Link to={`/albums/${album.id}/photos`}>{album.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
