@@ -14,6 +14,14 @@ const UserTabs: React.FC = () => {
         Главная страница
       </NavLink>
       <NavLink
+        to="/users/1"
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+      >
+        Моя страница
+      </NavLink>
+      <NavLink
         to="/users/1/albums"
         className={({ isActive }) =>
           isActive ? `${styles.link} ${styles.active}` : styles.link

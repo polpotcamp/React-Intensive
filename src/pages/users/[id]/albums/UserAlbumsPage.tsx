@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import type { Album } from "../../../../types/AlbumType";
 import { Link } from "react-router-dom";
-
+import Albums from "../../../../Albums.json";
 const UserAlbumsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);
@@ -12,31 +12,14 @@ const UserAlbumsPage: React.FC = () => {
 
   React.useEffect(() => {
     if (isNaN(userId) || userId <= 0) {
+      setAlbums([]);
       setLoading(false);
       return;
     }
-
-    const fetchAlbums = async () => {
-      try {
-        setLoading(true);
-
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${userId}/albums`
-        );
-        if (!response.ok) {
-          throw new Error(`Ошибка загрузки: ${response.status}`);
-        }
-
-        const data: Album[] = await response.json();
-        setAlbums(data);
-      } catch (e) {
-        throw new Error(`${e as Error}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAlbums();
+    setLoading(true);
+    const userAlbums = Albums.filter((album) => album.userId === userId);
+    setAlbums(userAlbums);
+    setLoading(false);
   }, [userId]);
 
   if (loading) return <p>Загрузка альбомов...</p>;

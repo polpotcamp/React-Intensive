@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import type { Todo } from "../../../../types/TodoType";
+import Todos from "../../../../Todos.json";
 const UserTodosPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);
@@ -10,31 +11,17 @@ const UserTodosPage: React.FC = () => {
 
   React.useEffect(() => {
     if (isNaN(userId) || userId <= 0) {
+      setTodos([]);
       setLoading(false);
       return;
     }
 
-    const fetchTodos = async () => {
-      try {
-        setLoading(true);
+    setLoading(true);
 
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${userId}/todos`
-        );
-        if (!response.ok) {
-          throw new Error(`Ошибка загрузки: ${response.status}`);
-        }
+    const userTodos = Todos.filter((todo) => todo.userId === userId);
 
-        const data: Todo[] = await response.json();
-        setTodos(data);
-      } catch (e) {
-        throw new Error(`${e as Error}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTodos();
+    setTodos(userTodos);
+    setLoading(false);
   }, [userId]);
 
   if (loading) return <p>Загрузка задач...</p>;

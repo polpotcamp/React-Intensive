@@ -6,6 +6,10 @@ import type { Photo } from "../../../types/PhotoType";
 import type { Todo } from "../../../types/TodoType";
 import type { Post } from "../../../types/PostType";
 import PostCard from "../../../entities/post/ui/PostCard";
+import Albums from "../../../Albums.json";
+import Photos from "../../../Photos.json";
+import Todos from "../../../Todos.json";
+import Posts from "../../../Posts.json";
 
 const UserPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,66 +20,29 @@ const UserPage: React.FC = () => {
   const [todos, setTodos] = React.useState<Todo[]>([]);
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+    setLoading(true);
+    const userAlbums = Albums.filter((album) => album.userId === userId);
+    const userTodos = Todos.filter((todo) => todo.userId === userId);
+    const userPosts = Posts.filter((post) => post.userId === userId);
 
-        const [albumsRes, todosRes, postsRes] = await Promise.all([
-          fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`),
-          fetch(`https://jsonplaceholder.typicode.com/todos?userId=${userId}`),
-          fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`),
-        ]);
+    const photosByAlbum: Record<number, Photo[]> = {};
+    userAlbums.forEach((album) => {
+      photosByAlbum[album.id] = Photos.filter(
+        (photo) => photo.albumId === album.id
+      );
+    });
 
-        if (!albumsRes.ok || !todosRes.ok || !postsRes.ok) {
-          throw new Error("Ошибка при загрузке данных");
-        }
+    setAlbums(userAlbums);
+    setTodos(userTodos);
+    setPosts(userPosts);
+    setPhotos(photosByAlbum);
 
-        const albumsData: Album[] = await albumsRes.json();
-        const todosData: Todo[] = await todosRes.json();
-        const postsData: Post[] = await postsRes.json();
-
-        setAlbums(albumsData);
-        setTodos(todosData);
-        setPosts(postsData);
-
-        const photosPromises = albumsData.map((album) =>
-          fetch(
-            `https://jsonplaceholder.typicode.com/photos?albumId=${album.id}`
-          )
-            .then((res) => {
-              if (!res.ok) throw new Error("Ошибка при загрузке фото");
-              return res.json();
-            })
-            .then((photos: Photo[]) => ({ albumId: album.id, photos }))
-        );
-
-        const photosResults = await Promise.all(photosPromises);
-
-        const photosByAlbum: Record<number, Photo[]> = {};
-        photosResults.forEach(({ albumId, photos }) => {
-          photosByAlbum[albumId] = photos;
-        });
-
-        setPhotos(photosByAlbum);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Неизвестная ошибка");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    setLoading(false);
   }, [userId]);
 
   if (loading) return <p>Загрузка...</p>;
-  if (error) return <p className={styles.error}>Ошибка: {error}</p>;
 
   return (
     <div className={styles.container}>
@@ -86,7 +53,7 @@ const UserPage: React.FC = () => {
         {todos.length === 0 && <p>Todos не найдены.</p>}
         <ul className={styles.todoList}>
           {todos.map((todo) => (
-            <li key={todo.id} className={`${styles.todoItem} `}>
+            <li key={todo.id} className={styles.todoItem}>
               {todo.title}
             </li>
           ))}
@@ -100,6 +67,7 @@ const UserPage: React.FC = () => {
           <PostCard key={post.id} post={post} />
         ))}
       </section>
+
       <section className={styles.section}>
         <h2>Альбомы и фото</h2>
         {albums.length === 0 && <p>Альбомы не найдены.</p>}

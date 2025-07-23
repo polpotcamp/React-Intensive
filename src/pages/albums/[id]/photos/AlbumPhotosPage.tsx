@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import type { Photo } from "../../../../types/PhotoType";
-
+import Albums from "../../../../Albums.json"
+import Photos from "../../../../Photos.json"
 const AlbumPhotosPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const albumId = Number(id);
@@ -9,38 +10,27 @@ const AlbumPhotosPage: React.FC = () => {
   const [photos, setPhotos] = React.useState<Photo[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  React.useEffect(() => {
+ React.useEffect(() => {
     if (isNaN(albumId) || albumId <= 0) {
+      setPhotos([]);
       setLoading(false);
       return;
     }
 
-    const fetchPhotos = async () => {
-      try {
-        setLoading(true);
+    const albumExists = Albums.some(album => album.id === albumId);
+    if (!albumExists) {
+      setPhotos([]);
+      setLoading(false);
+      return;
+    }
+    const filteredPhotos = Photos.filter(photo => photo.albumId === albumId);
 
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`
-        );
-        if (!response.ok) {
-          throw new Error(`Ошибка загрузки: ${response.status}`);
-        }
-
-        const data: Photo[] = await response.json();
-        setPhotos(data);
-      } catch (e) {
-        throw new Error(`${e as Error}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPhotos();
-  }, [albumId]);
+    setPhotos(filteredPhotos);
+    setLoading(false);
+  }, [albumId])
 
   if (loading) return <p>Загрузка фотографий...</p>;
   if (photos.length === 0) return <p>Фотографии не найдены</p>;
-  console.log(photos);
   return (
     <div>
       <h1>Фотографии альбома {albumId}</h1>

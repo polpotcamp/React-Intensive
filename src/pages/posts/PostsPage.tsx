@@ -6,14 +6,14 @@ import withLoading from "../../shared/lib/hoc/HOC";
 import { usePosts } from "../../features/PostList/model/hooks/usePosts";
 
 const PostsPage: React.FC = () => {
-  const { posts, loading, error } = usePosts();
+  const { posts, loading } = usePosts();
   const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]);
   React.useEffect(() => {
     setFilteredPosts(posts);
   }, [posts]);
   const PostListWithLoading = React.useMemo(() => withLoading(PostList), []);
   if (loading) return <p>Загрузка...</p>;
-  if (error) return <p>Ошибка: {error}</p>;
+  if (!posts) return <p>Посты не найдены</p>;
   return (
     <>
       <PostLengthFilter posts={posts} onFilter={setFilteredPosts} />
