@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import type { Album } from "../../../../types/AlbumType";
 import { Link } from "react-router-dom";
 import Albums from "../../../../Albums.json";
+
 const UserAlbumsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);

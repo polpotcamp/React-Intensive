@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { usePosts } from "../../../features/PostList/model/hooks/usePosts";
+
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const postId = Number(id);
