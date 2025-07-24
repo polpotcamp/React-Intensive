@@ -3,10 +3,10 @@ import type { Post } from "../../types/PostType";
 import PostLengthFilter from "../../features/PostLengthFilter/ui/PostLengthFilter";
 import PostList from "../../widgets/PostList/PostList";
 import withLoading from "../../shared/lib/hoc/HOC";
-import { postApi } from "../../entities/[entity]/api/postsApi";
+import { postsApi } from "../../entities/post/api/postsApi";
 
 const PostsPage: React.FC = () => {
-  const { data: posts, isLoading, error } = postApi.useGetPostsQuery();
+  const { data: posts, isLoading, error } = postsApi.useGetPostsQuery();
   const [filteredPosts, setFilteredPosts] = React.useState<Post[]>([]);
 
   React.useEffect(() => {
@@ -24,7 +24,6 @@ const PostsPage: React.FC = () => {
     } 
     return <p>Ошибка: {errorMessage}</p>;
   }
-
   return (
     <>
       <PostLengthFilter posts={posts|| []} onFilter={setFilteredPosts} />

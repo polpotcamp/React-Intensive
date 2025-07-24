@@ -1,46 +1,25 @@
 import React from "react";
 import PostCard from "../../../../entities/post/ui/PostCard";
 import { useParams } from "react-router-dom";
-import type { Post } from "../../../../types/PostType";
+import { postsApi } from "../../../../entities/post/api/postsApi";
 
 const UserPostsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);
 
-  const [posts, setPosts] = React.useState<Post[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = postsApi.useGetPostsByUserIdQuery(userId);
 
-  React.useEffect(() => {
-    if (isNaN(userId) || userId <= 0) {
-      setLoading(false);
-      return;
-    }
+  if (isLoading) return <p>Загрузка постов...</p>;
 
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
+  if (error) {
+    return <p>Ошибка загрузки альбомов</p>;
+  }
 
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${userId}/posts`
-        );
-        if (!response.ok) {
-          throw new Error(`Ошибка загрузки: ${response.status}`);
-        }
-
-        const data: Post[] = await response.json();
-        setPosts(data);
-      } catch (e) {
-        throw new Error(`${e as Error}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, [userId]);
-
-  if (loading) return <p>Загрузка постов...</p>;
-  if (posts.length === 0) return <p>Посты не найдены</p>;
+  if (!posts || posts.length === 0) return <p>Посты не найдены</p>;
 
   return (
     <div>
