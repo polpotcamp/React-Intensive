@@ -1,0 +1,61 @@
+.container {
+  padding: 20px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+.nav{
+  display: flex;
+  gap: 15px;
+}
+.album {
+  margin-bottom: 30px;
+}
+
+.albumTitle {
+  margin-bottom: 10px;
+}
+
+.photosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photoItem {
+  width: 100px;
+  text-align: center;
+}
+
+.photoThumbnail {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.photoTitle {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.todoList {
+  list-style: none;
+  padding-left: 0;
+}
+
+.todoItem {
+  margin-bottom: 6px;
+}
+
+.todoCompleted {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.post {
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}

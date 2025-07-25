@@ -1,6 +1,6 @@
 import styles from "./Button.module.css";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 }
 
