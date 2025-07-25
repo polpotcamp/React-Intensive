@@ -10,6 +10,7 @@ import Albums from "../../../Albums.json";
 import Photos from "../../../Photos.json";
 import Todos from "../../../Todos.json";
 import Posts from "../../../Posts.json";
+import { Outlet, NavLink } from "react-router-dom";
 
 const UserPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -47,7 +48,34 @@ const UserPage: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1>Пользователь {userId}</h1>
-
+      <div className={styles.nav}>
+        <NavLink
+          to={`/users/${userId}/albums`}
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Альбомы пользователя
+        </NavLink>
+        <NavLink
+          to={`/users/${userId}/todos`}
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Задачи пользователя
+        </NavLink>
+        <NavLink
+          to={`/users/${userId}/posts`}
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          Посты пользователя
+        </NavLink>
+      </div>
+      <Outlet />
+      {/* 
       <section className={styles.section}>
         <h2>Todos</h2>
         {todos.length === 0 && <p>Todos не найдены.</p>}
@@ -92,6 +120,7 @@ const UserPage: React.FC = () => {
           </div>
         ))}
       </section>
+      */}
     </div>
   );
 };

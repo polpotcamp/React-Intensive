@@ -5,7 +5,10 @@
 .section {
   margin-bottom: 40px;
 }
-
+.nav{
+  display: flex;
+  gap: 15px;
+}
 .album {
   margin-bottom: 30px;
 }
