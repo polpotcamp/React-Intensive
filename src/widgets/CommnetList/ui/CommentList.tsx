@@ -1,21 +1,22 @@
-import React from "react";
 import type { Comment } from "../../../types/CommnetType";
 import CommentCard from "../../../entities/comment/ui/CommentCard";
 import styles from "./CommentList.module.css";
+import ItemList from "../../../shared/ui/ItemList/ItemList";
 interface CommentListProps {
   comments: Comment[];
 }
 
-const CommentList: React.FC<CommentListProps> = ({ comments }) => {
+const CommentList = ({ comments }: CommentListProps) => {
   if (!comments || comments.length === 0) {
     return null;
   }
 
   return (
     <div className={styles.comments}>
-      {comments.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} />
-      ))}
+      <ItemList
+        items={comments}
+        renderItem={(comment) => <CommentCard key={comment.id} comment={comment} />}
+      />
     </div>
   );
 };
