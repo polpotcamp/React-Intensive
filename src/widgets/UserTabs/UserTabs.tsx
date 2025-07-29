@@ -45,6 +45,14 @@ const UserTabs: React.FC = () => {
       >
         Мои посты
       </NavLink>
+      <NavLink
+        to="/users"
+        className={({ isActive }) =>
+          isActive ? `${styles.link} ${styles.active}` : styles.link
+        }
+      >
+        Пользователи
+      </NavLink>
     </nav>
   );
 };
