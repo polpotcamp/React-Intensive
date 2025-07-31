@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../providers/store/store";
-import { selectAllUsers } from "../../entities/user/model/slice/UserSlice";
-import { fetchUsers } from "../../entities/user/model/slice/UserSlice";
+import { selectAllUsers } from "../../entities/user/model/slice/userSlice";
+import { fetchUsers } from "../../entities/user/model/slice/userSlice";
 import type { RootState } from "../../providers/store/store";
 const UsersPage: React.FC = () => {
   const dispatch = useAppDispatch();
