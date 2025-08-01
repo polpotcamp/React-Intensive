@@ -5,7 +5,7 @@ import { albumsApi } from "../../entities/album/api/albumsApi";
 import { todosApi } from "../../entities/todo/api/todosApi";
 import { useSelector , useDispatch} from "react-redux";
 import postReducer from '../../entities/post/model/slice/postSlice'
-import userReducer from '../../entities/user/model/slice/UserSlice'
+import userReducer from '../../entities/user/model/slice/userSlice'
 const rootReducer = combineReducers({
   posts: postReducer,
   users: userReducer,
