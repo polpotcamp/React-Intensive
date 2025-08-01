@@ -10,7 +10,7 @@ export const todosApi = createApi({
   endpoints: (builder) => ({
     getTodosByUserId: builder.query<Todo[], number>({
       query: (userId) => `todos?userId=${userId}`,
-      providesTags: (result, error, userId) =>
+      providesTags: (result, _error, userId) =>
         result
           ? [
               ...result.map(({ id }) => ({ type: "Todos" as const, id })),

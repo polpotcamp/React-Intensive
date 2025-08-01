@@ -1,16 +1,17 @@
 import React from "react";
 import styles from "./UserPage.module.css";
 import { useParams } from "react-router-dom";
+/*
 import PostCard from "../../../entities/post/ui/PostCard";
 import { todosApi } from "../../../entities/todo/api/todosApi";
 import { albumsApi } from "../../../entities/album/api/albumsApi";
 import { postsApi } from "../../../entities/post/api/postsApi";
-import AlbumList from "../../../widgets/AlbumsList/AlbumList";
+import AlbumList from "../../../widgets/AlbumsList/AlbumList"; */
 import { Outlet, NavLink } from "react-router-dom";
 const UserPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const userId = Number(id);
-
+/*
   const {
     data: albums = [],
     isLoading: isAlbumsLoading,
@@ -45,7 +46,7 @@ const UserPage: React.FC = () => {
   if (error) {
     return <p>Ошибка загрузки данных пользователя</p>;
   }
-
+*/
   return (
     <div className={styles.container}>
       <h1>Пользователь {userId}</h1>
