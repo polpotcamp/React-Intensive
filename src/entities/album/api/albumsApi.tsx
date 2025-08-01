@@ -11,7 +11,7 @@ export const albumsApi = createApi({
   endpoints: (builder) => ({
     getPhotosByAlbumId: builder.query<Photo[], number>({
       query: (albumId) => `photos?albumId=${albumId}`,
-      providesTags: (result, error, albumId) =>
+      providesTags: (result, _error, albumId) =>
         result
           ? [
               ...result.map(({ id }) => ({ type: "Photo" as const, id })),
@@ -21,7 +21,7 @@ export const albumsApi = createApi({
     }),
     getAlbumsByUserId: builder.query<Album[], number>({
       query: (userId) => `albums?userId=${userId}`,
-      providesTags: (result, error, userId) =>
+      providesTags: (result, _error, userId) =>
         result
           ? [
               ...result.map(({ id }) => ({ type: "Album" as const, id })),
