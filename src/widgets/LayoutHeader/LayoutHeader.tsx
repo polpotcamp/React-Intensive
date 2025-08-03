@@ -2,6 +2,8 @@ import React, { type FC } from "react";
 import ThemeSwitcher from "../../features/ThemeSwitcher/ui/ThemeSwitcher";
 import Modal from "../../shared/ui/Modal/Modal";
 import { Button } from "../../shared/ui/Button/Button";
+import UserTabs from "../UserTabs/UserTabs";
+
 const LayoutHeader: FC = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
   const toggleModal = () => setModalOpen(!isModalOpen);
@@ -20,6 +22,7 @@ const LayoutHeader: FC = () => {
         </Modal.Body>
         <Modal.Footer>footer</Modal.Footer>
       </Modal>
+      <UserTabs />
     </header>
   );
 };

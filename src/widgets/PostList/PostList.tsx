@@ -1,17 +1,22 @@
-import type { FC } from "react";
 import type { Post } from "../../types/PostType";
 import PostCard from "../../entities/post/ui/PostCard";
 import styles from "./PostList.module.css";
+import ItemList from "../../shared/ui/ItemList/ItemList";
 interface PostListProps {
   posts: Post[];
 }
 
-const PostList: FC<PostListProps> = ({ posts }) => {
+const PostList = ({ posts }: PostListProps) => {
+  if (!posts || posts.length === 0) {
+    return null;
+  }
+
   return (
     <div className={styles.posts}>
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      <ItemList
+        items={posts}
+        renderItem={(post) => <PostCard key={post.id} post={post} />}
+      />
     </div>
   );
 };

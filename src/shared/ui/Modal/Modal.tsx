@@ -5,7 +5,6 @@ import { ModalContext } from "./ModalContext";
 import ModalHeader from "./ModalHeader";
 import ModalBody from "./ModalBody";
 import ModalFooter from "./ModalFooter";
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
